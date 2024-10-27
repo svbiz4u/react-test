@@ -1,26 +1,82 @@
 
 // src/App.jsx
+// import Product from './Product';
 
-import Product from './Product';
 
-export default function App() {
+import { useEffect, useState } from "react";
+
+const App = () => {
+  const [clicks, setClicks] = useState(() => {
+    const savedClicks = window.localStorage.getItem("saved-clicks");
+    if (savedClicks !== null) {
+      return Number(savedClicks);
+    }
+    return 0;
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem("saved-clicks", clicks);
+  }, [clicks]);
+
   return (
     <div>
-    <h1>Best selling</h1>
-
-    <Product
-      name="Tacos With Lime"
-      imgUrl="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?dpr=2&h=480&w=640"
-      price={10.99}
-    />
-    <Product
-      name="Fries and Burger"
-      imgUrl="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?dpr=2&h=480&w=640"
-      price={14.29}
-    />
-  </div>
+      <button onClick={() => setClicks(clicks + 1)}>
+        You clicked {clicks} times
+      </button>
+      <button onClick={() => setClicks(0)}>Reset</button>
+    </div>
   );
-}
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export default App
+
+
+// export default function App() {
+//   return (
+//   //   <div>
+//   //   <h1>Best selling</h1> 
+
+//   //   <Product
+//   //     name="Tacos With Lime"
+//   //     imgUrl="https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?dpr=2&h=480&w=640"
+//   //     price={10.99}
+//   //   />
+//   //   <Product
+//   //     name="Fries and Burger"
+//   //     imgUrl="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?dpr=2&h=480&w=640"
+//   //     price={14.29}
+//   //   />
+
+    
+
+//   // </div>
+//   );
+// }
 
 
 
